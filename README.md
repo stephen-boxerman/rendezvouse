@@ -1,31 +1,9 @@
-# ui-spa
+# Renevous
 
-## User Interface
-```
-yarn install
-```
+## COS243 Final Project
 
-### Compiles and hot-reloads for development
+### Credits
 ```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## Application Server
-
-### Runs the application server
-```
-yarn hapi
+Stephen Boxerman
+Cordell King
 ```
