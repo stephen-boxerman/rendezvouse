@@ -46,7 +46,7 @@
                 ]/**/
             }
         };
-    }/*,
+    },
     methods: {
         handleSubmit: function() {
             axios
@@ -64,6 +64,16 @@
                     }
                 })
                 .catch(err => this.showDialog("Failed", err));
-            },
-           */         
+        },
+        showDialog: function(header, text) {
+            this.dialogHeader = header;
+            this.dialogText = text;
+            this.dialogVisible = true;
+        },
+        hideDialog: function() {
+            this.dialogVisible = false;
+            this.$router.push({ name: "home-page" });
+        }
+    }
+};
 </script>
