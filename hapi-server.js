@@ -1,17 +1,14 @@
+////////////////////////////////////////////////
+//------------Stephen Boxerman----------------//
+//--------------Cordell King------------------//
+//----------------COS 243---------------------//
+//--------------12/04/2018--------------------//
+////////////////////////////////////////////////
+
 // Standard Node modules
 const Path = require("path");
 
 // Knex
-/*
-const knex = require("knex")({
-    client: "pg",
-    connection: {
-        host: "localhost",
-        database: "ui-data"
-    }
-});
-*/
-
 const knex = require("knex")({
     client: "pg",
     connection: {
@@ -53,6 +50,24 @@ async function init() {
 
     // Configure routes.
     server.route([
+        {
+            method: "POST",
+            path: "/api/home",
+            config: {
+                description: "Ye Olde Home Page",
+                validate: {
+                    payload: {
+                        data: Joi.string().required()
+                    }
+                }
+            },
+            handler: async (request, h) => {
+                
+            }
+        }
+    ]);
+    //These routs need to change to reflect our page structure --Stephen 12/4
+    /*server.route([
         {
             method: "POST",
             path: "/api/accounts",
@@ -124,7 +139,7 @@ async function init() {
                 }
             }
         }
-    ]);
+    ]);*/
 
     // Start the server.
     await server.start();
