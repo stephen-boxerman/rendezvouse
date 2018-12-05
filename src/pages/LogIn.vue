@@ -7,9 +7,9 @@
 </template>
 
 <script>
-    import Instructions from "../components/Instructions.vue";
-    import axios from "axios";
-    
+    //import Instructions from "../components/Instructions.vue";
+    //import axios from "axios";
+    /*
     export default {
         name: "SignUpPage",
         components: {
@@ -43,7 +43,7 @@
                     val => /[a-z]/.test(val) || "Need lower case letter",
                     val => /\d/.test(val) || "Need digit",
                     val => val.length >= 8 || "Minimum 8 characters"
-                ]/**/
+                ]/**//*
             }
         };
     },
@@ -51,8 +51,8 @@
         handleSubmit: function() {
             axios
                 .post("/api/home", {
-                    text_box1: this.text_box1,
-                    text_box2: this.text_box2
+                    //text_box1: this.text_box1,
+                    //text_box2: this.text_box2
                 })
                 .then(result => {
                     if (result.status === 200) {
@@ -75,5 +75,5 @@
             this.$router.push({ name: "home-page" });
         }
     }
-};
+};/**/
 </script>

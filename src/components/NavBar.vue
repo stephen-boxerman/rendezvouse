@@ -28,13 +28,17 @@
             <v-icon dark>arrow_drop_down</v-icon>
         </v-btn>
         <v-list>
+            <template slot="items" slot-scope="props">
+                <td>{{ props.item.email }}</td>
+            </template>
+            <!--
             <v-list-tile v-bind:to="{ name: 'team-page' }">
                 <v-list-tile-title>Team 1</v-list-tile-title>
             </v-list-tile>
             <v-list-tile v-bind:to="{ name: 'sign-up' }">
                 <v-list-tile-title>Team 2</v-list-tile-title>
             </v-list-tile>
-            
+            -->
         </v-list>
     </v-menu>
 	
@@ -54,3 +58,20 @@
 	-->
     </v-toolbar>
 </template>
+
+<script>
+    const axios = require("axios");
+    
+    export default {
+        name: "Accounts",
+        data: function () {
+            return {
+                headers: [
+                ],
+                accounts: []
+            };
+        },
+        mounted: function() {
+        }
+    };       
+</script>
