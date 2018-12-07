@@ -17,6 +17,7 @@ import LogIn from "./pages/LogIn.vue";
 import MyTeams from "./pages/MyTeams.vue";
 import Team from "./pages/Team.vue";
 import Schedule from "./pages/Schedule.vue";
+import NewTeam from "./pages/NewTeam.vue";
 
 import VueRouter from "vue-router";
 
@@ -33,7 +34,8 @@ const router = new VueRouter({
 	{name: "login", path: "/login", component: LogIn},
 	{name: "my-teams", path: "/my-teams", component: MyTeams},
 	{name: "team-page", path: "/team-page", component: Team},
-	{name: "schedule-page", path: "/schedule-page", component: Schedule}
+	{name: "schedule-page", path: "/schedule-page", component: Schedule},
+	{name: "new-team", path: "/new-team", component: NewTeam}
     ]
 });
 
@@ -42,5 +44,6 @@ import App from "./App.vue";
 new Vue({
     el: "#app",
     router,
+    data: { currentUser: null },
     render: h => h(App)
 });

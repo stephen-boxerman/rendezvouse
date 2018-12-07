@@ -50,21 +50,131 @@ async function init() {
 
     // Configure routes.
     server.route([
-        {
-            method: "POST",
-            path: "/api/home",
-            config: {
-                description: "Ye Olde Home Page",
-                validate: {
-                    payload: {
-                        data: Joi.string().required()
-                    }
-                }
-            },
-            handler: async (request, h) => {
-                
+	/*
+      {
+          method: "GET",
+          path: "/api/home",
+          config: {
+              description: "Ye Olde Home Page",
+              validate: {
+                  payload: {
+                      data: Joi.string().required()
+                  }
+              }
+          },
+          handler: async (request, h) => {
+
+          }
+      }, */
+      {
+        method: "POST",
+        path: "/api/login",
+        config:
+          {
+            description: "Login to view your teams",
+            validate:
+              {
+                payload:
+                  {
+                    email: Joi.string()
+                      .email()
+                      .required(),
+                    password: Joi.string().required()
+                  
+                  }
+              }
+          },
+        handler: async (request, h) => {
+          let resultSet = await knex("members")
+            .select()
+            .where("email", request.payload.email);
+
+          if(resultSet.length === 0)
+          {
+            return {
+              ok: false,
+              msge: `The user at '${request.payload.email}' does not exist`
             }
+          }
+
+          let result = knex("members")
+            .select("password")
+            .where("email", request.payload.email);
+
+          if(result.rowCount === 2)
+          {
+            //console.log(result)
+            return {
+              ok: true,
+              msge: `'${result}'`
+              //msge: `Successfully logged in as '${request.payload.email}'`
+            }
+          } else
+          {
+            return {
+              ok: false,
+              //msge: `No Data received for '${request.payload.email}'`
+              msge: `No Data received for '${result.rowCount}'`
+            }
+          }
+          /*
+          {
+            return {
+              ok: true,
+              msge: `Successfully logged in as '${request.payload.email}'`
+            }
+          }
+          else
+          {
+            return {
+              ok: false,
+              msge: `Incorrect password for '${request.payload.email}'`
+            }
+          }/**/
         }
+      },
+      {
+        method: "POST",
+        path: "/api/new-team",
+        config:
+              {
+              description: "Created new team",
+              validate:
+                    {
+                      payload:
+                      {
+                        data: Joi.string().required()
+                      }
+                    }
+              },
+        handler: async (request, h) =>
+        {
+          let resultSet = await knex("teams")
+            .select()
+            .where("team_name", request.payload.teamName);
+          if(resultSet.length > 0)
+          {
+            return {
+              ok: false,
+              msge: `The team '${request.payload.teamName}' already exists`
+            }
+          }
+
+          let result = await knex("teams").insert
+          ({
+            owner: Vue.$root.currentUser,
+            team_name: request.payload.teamName
+          });
+
+          {
+            return {
+              ok: true,
+              msge: `Team '${request.payload.teamName}' has been created`
+            };
+
+          }
+        }
+      }
     ]);
     //These routs need to change to reflect our page structure --Stephen 12/4
     /*server.route([

@@ -35,13 +35,16 @@
             <div id="teamList">
                 <v-select v-model="selected" :options="options"></v-select>
             </div>
-            <!---->
+            -->
             
             <v-list-tile v-bind:to="{ name: 'team-page' }">
                 <v-list-tile-title>Team 1</v-list-tile-title>
             </v-list-tile>
             <v-list-tile v-bind:to="{ name: 'sign-up' }">
                 <v-list-tile-title>Team 2</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-bind:to="{ name: 'new-team' }">
+                <v-list-tile-title>New Team</v-list-tile-title>
             </v-list-tile>
             <!---->
         </v-list>
@@ -81,16 +84,15 @@
 
 
 
-    const axios = require("axios");
+    //const axios = require("axios");
     
     export default {
         name: "Accounts",
         data: function () {
             return {
-                headers: [
-                ],
+                headers: [],
                 accounts: []
-            };
+            }
         },
         mounted: function() {
         }
