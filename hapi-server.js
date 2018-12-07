@@ -64,7 +64,67 @@ async function init() {
             handler: async (request, h) => {
                 
             }
+        },
+        {
+          method: "GET",
+          path: "/api/login",
+          config:
+            {
+                description: "Rendezvous login page",
+                validate:
+                {
+                    payload:
+                      {
+                          data: Joi.string().required()
+                      }
+                }
+            },
+          handler: async (results, h) =>
+            {
+                let resultSet = await knex("members")
+                  .select()
+                  .where("email", results.payload.email);
+
+                if(resultSet.lenth === 0 )
+                {
+                    return {
+                      ok: false,
+                      msge: `'${results.payload.email}' does not exist`
+                    }
+                }
+
+                let result = await knex("members")
+                  .select("password")
+                  .where("email", results.payload.email);
+
+                if(result.rowCount !== 1)
+                {
+                    return {
+                        ok: false,
+                        msge: "There was a problem logging in."
+                    }
+                }
+                else
+                {
+                    if(result === results.paylaod.password)
+                    {
+                        return {
+                            ok: true,
+                            msge: `${results.payload.password} successfully logged in.`
+                        }
+                    }
+                    else
+                    {
+                        return {
+                            ok: false,
+                            msge: "Passwords do not match.  Please try again"
+                        }
+                    }
+                }
+            }
+
         }
+
     ]);
     //These routs need to change to reflect our page structure --Stephen 12/4
     /*server.route([
